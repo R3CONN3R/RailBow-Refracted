@@ -53,13 +53,13 @@ data:extend({
     reverse_select = { --remove_tiles
       border_color = { r = 1, g = 0, b = 0 },
       cursor_box_type = "not-allowed",
-      mode = "deconstruct",
+      mode = "any-entity",
       entity_filters = filter
     },
     alt_reverse_select = { --remove_ents
       border_color = { r = 1, g = 0.5, b = 0 },
       cursor_box_type = "not-allowed",
-      mode = "deconstruct",
+      mode = "any-entity",
       entity_filters = filter
     },
     icon = "__RailBow-Refracted__/graphics/railbow-selection-tool.png",
@@ -131,7 +131,7 @@ data:extend({
     type = "custom-input",
     name = "railbow-open-gui",
     order = "b",
-    key_sequence = "Shift + N",
+    key_sequence = "SHIFT + N",
     action = "lua",
     consuming = "game-only",
     factoriopedia_description = {"fpedia-description.railbow-open-gui"},

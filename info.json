@@ -3,7 +3,7 @@
   "title": "RailBow Refracted",
   "version": "1.3.0",
   "author": "R3CONN3R",
-  "factorio_version": "2.0",
+  "factorio_version": "2.1",
   "dependencies": [
     "base",
     "? elevated-rails",
