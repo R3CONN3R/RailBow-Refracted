@@ -7,22 +7,22 @@ local lib = {}
 function lib.create_railbow_window(player)
     local railbow_tool = storage.railbow_tools[player.index]
 
-    local frame = player.gui.screen.add{
+    local frame = player.gui.screen.add {
         type = "frame",
         name = "railbow_window",
         direction = "vertical"
     }
-    frame.location = {75, 75}
+    frame.location = { 75, 75 }
     player.opened = frame
 
     gui_elements.main_title_bar(frame, "titles.railbow-gui-title")
 
-    frame.add{
+    frame.add {
         type = "flow",
         name = "configuration_flow",
         direction = "horizontal"
     }
-    
+
     local selection_frame = gui_elements.preset_selection_frame(frame.configuration_flow)
     gui_elements.preset_list_header(selection_frame)
     local preset_list = gui_elements.preset_list(selection_frame)
@@ -37,16 +37,16 @@ function lib.create_export_string_window(player)
     if player.gui.screen.export_string_window then
         player.gui.screen.export_string_window.destroy()
     end
-    local frame = player.gui.screen.add{
+    local frame = player.gui.screen.add {
         type = "frame",
         name = "export_string_window",
         direction = "vertical"
     }
-    frame.location = {75, 75}
+    frame.location = { 75, 75 }
 
     gui_elements.main_title_bar(frame, "titles.railbow-export-preset")
 
-    frame.add{
+    frame.add {
         type = "flow",
         name = "export_string_flow",
         direction = "horizontal"
@@ -59,16 +59,16 @@ function lib.create_import_string_window(player)
     if player.gui.screen.import_string_window then
         player.gui.screen.import_string_window.destroy()
     end
-    local frame = player.gui.screen.add{
+    local frame = player.gui.screen.add {
         type = "frame",
         name = "import_string_window",
         direction = "vertical"
     }
-    frame.location = {75, 75}
+    frame.location = { 75, 75 }
 
     gui_elements.main_title_bar(frame, "titles.railbow-import-preset")
 
-    frame.add{
+    frame.add {
         type = "flow",
         name = "import_string_flow",
         direction = "vertical"

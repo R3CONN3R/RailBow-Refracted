@@ -64,7 +64,7 @@ local function initialize_global(player)
         }
 
         storage.railbow_tools[player.index] = {
-            presets = {init_config},
+            presets = { init_config },
             selected_preset = 1,
             opened_preset = nil,
             copied_tile = nil
@@ -76,12 +76,12 @@ local function create_button(player)
     if not player then return end
     local button_flow = mod_gui.get_button_flow(player)
     if not button_flow.railbow_button then
-        button_flow.add{
+        button_flow.add {
             type = "sprite-button",
             name = "railbow_button",
             sprite = "item/railbow-selection-tool",
-            tooltip = {"tooltips.railbow-open-gui"}, 
-            style=mod_gui.button_style
+            tooltip = { "tooltips.railbow-open-gui" },
+            style = mod_gui.button_style
         }
     end
 end
@@ -106,7 +106,7 @@ local function on_init()
     storage.railbow_tools = {}
     --- @type RailBowCalculation[]
     storage.railbow_calculation_queue = {}
-    
+
     for _, player in pairs(game.players) do
         initialize_global(player)
         create_button(player)

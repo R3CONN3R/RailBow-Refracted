@@ -41,7 +41,7 @@ function lib.add_preset(player, tiles, preset_name, remove_trees, remove_cliffs)
         remove_cliffs = remove_cliffs
     }
     table.insert(storage.railbow_tools[player.index].presets, new_preset)
-    
+
     local list = player.gui.screen.railbow_window.configuration_flow.selection_frame.preset_list
     gui_elements.preset_selector(list, n_presets + 1)
 end
@@ -105,7 +105,7 @@ function lib.change_opened_preset(player, index, toggled)
         lib.open_preset(conflow)
         return
     end
-    
+
     local old_flow = conflow.selection_frame.preset_list["preset_flow_" .. previous_index]
     old_flow.preset_button.toggled = false
 
@@ -142,7 +142,6 @@ function lib.change_opened_preset(player, index, toggled)
             end
         end
     end
-
 end
 
 --- @param player LuaPlayer
@@ -208,7 +207,8 @@ function lib.copy_preset(player)
     }
 
     table.insert(presets, new_preset)
-    gui_elements.preset_selector(player.gui.screen.railbow_window.configuration_flow.selection_frame.preset_list, n_presets + 1)
+    gui_elements.preset_selector(player.gui.screen.railbow_window.configuration_flow.selection_frame.preset_list,
+        n_presets + 1)
 end
 
 function lib.tile_selector_clicked(event)
@@ -272,7 +272,7 @@ function lib.import_preset(player)
         j = tonumber(i)
         log(serpent.block(j))
         if j then
-            tiles[j] = tile--"invalid" --- tile
+            tiles[j] = tile --"invalid" --- tile
         end
     end
     log(serpent.block(tiles))

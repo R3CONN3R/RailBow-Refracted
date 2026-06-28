@@ -53,7 +53,7 @@ local function gui_click(event)
             end
         end
     elseif element.name == "add_preset_button" then
----@diagnostic disable-next-line: missing-parameter
+        ---@diagnostic disable-next-line: missing-parameter
         interactions.add_preset(player)
     elseif element.name == "preset_button" then
         local index = tonumber(element.parent.name:match("([+-]?%d+)$"))
@@ -114,7 +114,8 @@ local function text_changed(event)
         local railbow_tool = storage.railbow_tools[player_index]
         local opened_preset = railbow_tool.opened_preset
         railbow_tool.presets[opened_preset].name = element.text
-        player.gui.screen.railbow_window.configuration_flow.selection_frame.preset_list["preset_flow_" .. opened_preset].preset_button.caption = element.text
+        player.gui.screen.railbow_window.configuration_flow.selection_frame.preset_list["preset_flow_" .. opened_preset].preset_button.caption =
+        element.text
     end
 end
 
@@ -131,7 +132,6 @@ local function checked_state_changed(event)
         end
     elseif element.name == "remove_trees_checkbox" then
         interactions.toggle_remove_trees(player, element.state)
-
     elseif element.name == "remove_cliffs_checkbox" then
         interactions.toggle_remove_cliffs(player, element.state)
     end

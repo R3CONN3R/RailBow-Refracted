@@ -30,7 +30,7 @@ if script.active_mods["naked-rails-f2"] then
     masks["naked-curved-rail-a"] = masks["curved-rail-a"]
     masks["naked-curved-rail-b"] = masks["curved-rail-b"]
     masks["naked-straight-rail"] = masks["straight-rail"]
-    masks["naked-half-diagonal-rail"] = masks["half-diagonal-rail"]    
+    masks["naked-half-diagonal-rail"] = masks["half-diagonal-rail"]
     masks["sleepy-curved-rail-a"] = masks["curved-rail-a"]
     masks["sleepy-curved-rail-b"] = masks["curved-rail-b"]
     masks["sleepy-straight-rail"] = masks["straight-rail"]

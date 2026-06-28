@@ -6,7 +6,8 @@ local rail_list = {
     "straight-rail",
     "half-diagonal-rail",
 }
-local static base_rail_list = {
+local static
+base_rail_list = {
     "curved-rail-a",
     "curved-rail-b",
     "straight-rail",
@@ -14,21 +15,21 @@ local static base_rail_list = {
 }
 
 if script.active_mods["elevated-rails"] then
-	table.insert(rail_list, "rail-ramp")
-	for _, rail in pairs(base_rail_list) do
-        table.insert(rail_list, "elevated-"..rail)
+    table.insert(rail_list, "rail-ramp")
+    for _, rail in pairs(base_rail_list) do
+        table.insert(rail_list, "elevated-" .. rail)
     end
-	log("elevated rails found and added")
+    log("elevated rails found and added")
 end
 
 if script.active_mods["naked-rails-f2"] then
     for _, rail in pairs(base_rail_list) do
-        table.insert(rail_list, "naked-"..rail)     
-        table.insert(rail_list, "sleepy-"..rail)
+        table.insert(rail_list, "naked-" .. rail)
+        table.insert(rail_list, "sleepy-" .. rail)
     end
-	log("naked rails found and added")
+    log("naked rails found and added")
 end
-local signal_list = {"rail-signal", "rail-chain-signal"}
+local signal_list = { "rail-signal", "rail-chain-signal" }
 
 local function contains(table, element)
     for _, value in pairs(table) do
@@ -55,9 +56,9 @@ local function seperate_signals_and_rails(entities)
 end
 
 local function entity_pos_to_built_pos(entity)
-	if entity ~= nil then                    --prevent crash when only selecting rail signal
-		return math2d.position.add(entity.position, {0.5, 0.5})
-	end
+    if entity ~= nil then --prevent crash when only selecting rail signal
+        return math2d.position.add(entity.position, { 0.5, 0.5 })
+    end
 end
 
 ---@param player LuaPlayer|any
@@ -152,7 +153,10 @@ local function set_up_calculation(player, event, selection_tool_mode)
     }
 
     local rb_debug
-    if settings.get_player_settings(player)["railbow-debug"].value then rb_debug = true rendering.clear("RailBow-Refracted") end
+    if settings.get_player_settings(player)["railbow-debug"].value then
+        rb_debug = true
+        rendering.clear("RailBow-Refracted")
+    end
 
     --- @type RailBowCalculation
     local railbow_calculation = {
@@ -168,19 +172,19 @@ end
 ---@param player any
 ---@param event EventData|table
 local function check_valid(player, event)
-        if event.item ~= "railbow-selection-tool" then
-            return false
-        end
-        if not player then
-            return false
-        end
-        if settings.get_player_settings(player)["railbow-debug"].value then log(serpent.block(event.area)) end
-        rendering.clear("RailBow-Refracted")
-        if not next(event.entities) then
-            return false
-        end
-        return true
+    if event.item ~= "railbow-selection-tool" then
+        return false
     end
+    if not player then
+        return false
+    end
+    if settings.get_player_settings(player)["railbow-debug"].value then log(serpent.block(event.area)) end
+    rendering.clear("RailBow-Refracted")
+    if not next(event.entities) then
+        return false
+    end
+    return true
+end
 
 ---@param event EventData.on_player_selected_area
 local function on_player_selected_area(event)

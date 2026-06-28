@@ -10,20 +10,20 @@ function lib.main_title_bar(frame, caption)
     if frame.title_bar then
         frame.title_bar.destroy()
     end
-    local title_bar = frame.add{
-        type = "flow", 
-        name = "title_bar", 
+    local title_bar = frame.add {
+        type = "flow",
+        name = "title_bar",
         direction = "horizontal"
     }
 
-    title_bar.add{
+    title_bar.add {
         type = "label",
         style = "frame_title",
-        caption = {caption},
+        caption = { caption },
         ignored_by_interaction = true
     }
 
-    local dragger = title_bar.add{
+    local dragger = title_bar.add {
         type = "empty-widget",
         style = "draggable_space_header",
     }
@@ -32,12 +32,12 @@ function lib.main_title_bar(frame, caption)
     dragger.style.minimal_width = 24
     dragger.drag_target = frame
 
-    title_bar.add{
+    title_bar.add {
         type = "sprite-button",
         name = "close_button",
         sprite = "utility/close",
         style = "frame_action_button",
-        mouse_button_filter = {"left"}
+        mouse_button_filter = { "left" }
     }
 
     return title_bar
@@ -49,18 +49,18 @@ function lib.preset_list_header(frame)
     if frame.header then
         frame.header.destroy()
     end
-    local header = frame.add{
+    local header = frame.add {
         type = "flow",
         name = "header",
         direction = "horizontal"
     }
 
-    header.add{
+    header.add {
         type = "sprite-button",
         name = "add_preset_button",
         style = "tool_button_green",
         sprite = "utility/add",
-        tooltip = {"tooltips.railbow-add-preset"}
+        tooltip = { "tooltips.railbow-add-preset" }
     }
 
     local player = game.get_player(frame.player_index)
@@ -71,30 +71,30 @@ function lib.preset_list_header(frame)
         enabled = true
     end
 
-    header.add{
+    header.add {
         type = "sprite-button",
         name = "copy_preset_button",
         style = "tool_button",
         sprite = "utility/copy",
-        tooltip = {"tooltips.railbow-copy-preset"},
+        tooltip = { "tooltips.railbow-copy-preset" },
         enabled = enabled
     }
 
-    header.add{
+    header.add {
         type = "sprite-button",
         name = "export_preset_button",
         style = "tool_button",
         sprite = "utility/export",
-        tooltip = {"tooltips.railbow-export-preset"},
+        tooltip = { "tooltips.railbow-export-preset" },
         enabled = enabled
     }
 
-    header.add{
+    header.add {
         type = "sprite-button",
         name = "import_preset_button",
         style = "tool_button",
         sprite = "utility/import",
-        tooltip = {"tooltips.railbow-import-preset"},
+        tooltip = { "tooltips.railbow-import-preset" },
     }
 
     return header
@@ -111,7 +111,7 @@ function lib.preset_selector(list, index)
             child.destroy()
         end
     else
-        flow = list.add{
+        flow = list.add {
             type = "flow",
             name = "preset_flow_" .. index,
             direction = "horizontal"
@@ -122,15 +122,15 @@ function lib.preset_selector(list, index)
 
     flow.style.width = 185
 
-    flow.add{
+    flow.add {
         type = "radiobutton",
         name = "preset_selection",
         caption = "",
-        tooltip = {"tooltips.railbow-select-preset"},
+        tooltip = { "tooltips.railbow-select-preset" },
         state = index == railbow_tool.selected_preset
     }
 
-    local button = flow.add{
+    local button = flow.add {
         type = "button",
         name = "preset_button",
         caption = preset.name,
@@ -148,7 +148,7 @@ function lib.preset_list(frame)
     if frame.preset_list then
         frame.preset_list.destroy()
     end
-    local list = frame.add{
+    local list = frame.add {
         type = "scroll-pane",
         name = "preset_list",
         direction = "vertical",
@@ -168,7 +168,7 @@ function lib.preset_selection_frame(frame)
     if frame.selection_frame then
         frame.selection_frame.destroy()
     end
-    local selection_frame = frame.add{
+    local selection_frame = frame.add {
         type = "frame",
         name = "selection_frame",
         direction = "vertical"
@@ -206,13 +206,13 @@ function lib.elem_choose_header(frame)
         frame.elem_choose_header.destroy()
     end
 
-    local header = frame.add{
+    local header = frame.add {
         type = "flow",
         name = "header",
         direction = "horizontal"
     }
 
-    local preset_name = header.add{
+    local preset_name = header.add {
         type = "textfield",
         name = "preset_name",
         text = railbow_tool.presets[railbow_tool.opened_preset].name
@@ -220,30 +220,30 @@ function lib.elem_choose_header(frame)
 
     preset_name.style.width = 250
 
-    header.add{
+    header.add {
         type = "sprite-button",
         name = "delete_preset_button",
         sprite = "utility/trash",
-        tooltip = {"tooltips.railbow-delete-preset"},
+        tooltip = { "tooltips.railbow-delete-preset" },
         style = "tool_button_red",
-        mouse_button_filter = {"left"}
+        mouse_button_filter = { "left" }
     }
 
-    local remove_trees_checkbox = header.add{
+    local remove_trees_checkbox = header.add {
         type = "checkbox",
         name = "remove_trees_checkbox",
-        tooltip = {"tooltips.railbow-remove-trees"},
-        caption = {"button.railbow-remove-trees"},
+        tooltip = { "tooltips.railbow-remove-trees" },
+        caption = { "button.railbow-remove-trees" },
         state = false,
-        mouse_button_filter = {"left"}
+        mouse_button_filter = { "left" }
     }
-    local remove_cliffs_checkbox = header.add{
+    local remove_cliffs_checkbox = header.add {
         type = "checkbox",
         name = "remove_cliffs_checkbox",
-        tooltip = {"tooltips.railbow-remove-cliffs"},
-        caption = {"button.railbow-remove-cliffs"},
+        tooltip = { "tooltips.railbow-remove-cliffs" },
+        caption = { "button.railbow-remove-cliffs" },
         state = false,
-        mouse_button_filter = {"left"}
+        mouse_button_filter = { "left" }
     }
     if railbow_tool.presets[railbow_tool.opened_preset].remove_trees then
         remove_trees_checkbox.state = true
@@ -262,7 +262,7 @@ function lib.choose_elem_table(frame)
     if frame.choose_elem_table then
         frame.choose_elem_table.destroy()
     end
-    local table = frame.add{
+    local table = frame.add {
         type = "table",
         name = "table",
         column_count = 21
@@ -278,32 +278,32 @@ function lib.choose_elem_table(frame)
     for i = -10, 10 do
         if i ~= 0 then
             local status, _ = pcall(function()
-                table.add{
+                table.add {
                     type = "choose-elem-button",
                     name = "tile_selector_" .. i,
                     elem_type = "tile",
                     tile = selected_tiles[i],
-                    elem_filters = {{filter = "blueprintable"}},
+                    elem_filters = { { filter = "blueprintable" } },
                 }
             end)
             if not status then
                 local player = game.get_player(frame.player_index)
                 if not player then return table end
                 player.print("[color=red]Error: Invalid tile in preset, defaulting to nil.[/color]")
-                table.add{
+                table.add {
                     type = "choose-elem-button",
                     name = "tile_selector_" .. i,
                     elem_type = "tile",
                     tile = nil,
-                    elem_filters = {{filter = "blueprintable"}},
+                    elem_filters = { { filter = "blueprintable" } },
                 }
                 selected_tiles[i] = nil
             end
         else
-            table.add{
+            table.add {
                 type = "sprite-button",
                 sprite = "utility/indication_arrow",
-                tooltip = {"tooltips.railbow-gui-arrow"},
+                tooltip = { "tooltips.railbow-gui-arrow" },
                 enabled = false
             }
         end
@@ -318,7 +318,7 @@ function lib.tile_selection_frame(frame)
     if frame.tile_selection_frame then
         frame.tile_selection_frame.destroy()
     end
-    local tile_selection_frame = frame.add{
+    local tile_selection_frame = frame.add {
         type = "frame",
         name = "tile_selection_frame",
         direction = "vertical"
@@ -343,7 +343,7 @@ function lib.export_string_input(frame)
     log(serpent.block(json))
     local exchange_string = helpers.encode_string(json)
 
-    local input = frame.add{
+    local input = frame.add {
         type = "text-box",
         name = "export_string_input",
         text = exchange_string,
@@ -359,7 +359,7 @@ function lib.import_string_input(frame)
     if frame.import_string_input then
         frame.import_string_input.destroy()
     end
-    local input = frame.add{
+    local input = frame.add {
         type = "text-box",
         name = "import_string_input",
         text = "",
@@ -373,12 +373,12 @@ function lib.import_string_button(frame)
     if frame.import_string_button then
         frame.import_string_button.destroy()
     end
-    frame.add{
+    frame.add {
         type = "button",
         name = "import_string_button",
-        caption = {"button.railbow-import"},
+        caption = { "button.railbow-import" },
         style = "confirm_button"
-    } 
+    }
 end
 
 return lib

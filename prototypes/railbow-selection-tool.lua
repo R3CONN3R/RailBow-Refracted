@@ -8,7 +8,8 @@ local filter = {
   "straight-rail",
   "half-diagonal-rail",
 }
-local static base_rail_list = {
+local static
+base_rail_list = {
   "curved-rail-a",
   "curved-rail-b",
   "straight-rail",
@@ -24,9 +25,9 @@ end
 
 if mods["naked-rails-f2"] then
   for _, rail in pairs(base_rail_list) do
-    table.insert(filter, "naked-"..rail)
-    table.insert(filter, "sleepy-"..rail)
-  end    
+    table.insert(filter, "naked-" .. rail)
+    table.insert(filter, "sleepy-" .. rail)
+  end
 end
 
 table.insert(filter, "rail-signal")
@@ -43,7 +44,7 @@ data:extend({
       mode = "any-entity",
       entity_filters = filter
     },
-    
+
     alt_select = { --forced
       border_color = { r = 0, g = 0, b = 1 },
       cursor_box_type = "train-visualization",
@@ -67,22 +68,22 @@ data:extend({
     stack_size = 1,
     subgroup = "tool",
     hidden = false,
-    flags = {"not-stackable", "only-in-cursor", "spawnable"},
+    flags = { "not-stackable", "only-in-cursor", "spawnable" },
     localised_description = {
       "",
-      {"item-description.railbow-selection-tool"},
+      { "item-description.railbow-selection-tool" },
       "\n",
       font_start,
-      {"gui.instruction-when-in-cursor"},
+      { "gui.instruction-when-in-cursor" },
       ":",
       line_start,
-      {"item-description.railbow-selection-tool-place-tiles", "__CONTROL_LEFT_CLICK__"},
+      { "item-description.railbow-selection-tool-place-tiles",  "__CONTROL_LEFT_CLICK__" },
       line_start,
-      {"item-description.railbow-selection-tool-place-forced", "__CONTROL_KEY_SHIFT__ __CONTROL_STYLE_BEGIN__+__CONTROL_STYLE_END__ __CONTROL_LEFT_CLICK__"},
+      { "item-description.railbow-selection-tool-place-forced", "__CONTROL_KEY_SHIFT__ __CONTROL_STYLE_BEGIN__+__CONTROL_STYLE_END__ __CONTROL_LEFT_CLICK__" },
       line_start,
-      {"item-description.railbow-selection-tool-remove-tiles", "__CONTROL_RIGHT_CLICK__"},
+      { "item-description.railbow-selection-tool-remove-tiles", "__CONTROL_RIGHT_CLICK__" },
       line_start,
-      {"item-description.railbow-selection-tool-remove-ents", "__CONTROL_KEY_SHIFT__ __CONTROL_STYLE_BEGIN__+__CONTROL_STYLE_END__ __CONTROL_RIGHT_CLICK__"},
+      { "item-description.railbow-selection-tool-remove-ents",  "__CONTROL_KEY_SHIFT__ __CONTROL_STYLE_BEGIN__+__CONTROL_STYLE_END__ __CONTROL_RIGHT_CLICK__" },
       "\n",
       font_end,
     }
@@ -101,19 +102,19 @@ data:extend({
     associated_control_input = "railbow-get-selection-tool",
     localised_name = {
       "",
-      {"item-description.railbow-selection-tool"},
+      { "item-description.railbow-selection-tool" },
       "\n",
       font_start,
-      {"gui.instruction-when-in-cursor"},
+      { "gui.instruction-when-in-cursor" },
       ":",
       line_start,
-      {"item-description.railbow-selection-tool-place-tiles", "__CONTROL_LEFT_CLICK__"},
+      { "item-description.railbow-selection-tool-place-tiles",  "__CONTROL_LEFT_CLICK__" },
       line_start,
-      {"item-description.railbow-selection-tool-place-forced", "__CONTROL_KEY_SHIFT__ __CONTROL_STYLE_BEGIN__+__CONTROL_STYLE_END__ __CONTROL_LEFT_CLICK__"},
+      { "item-description.railbow-selection-tool-place-forced", "__CONTROL_KEY_SHIFT__ __CONTROL_STYLE_BEGIN__+__CONTROL_STYLE_END__ __CONTROL_LEFT_CLICK__" },
       line_start,
-      {"item-description.railbow-selection-tool-remove-tiles", "__CONTROL_RIGHT_CLICK__"},
+      { "item-description.railbow-selection-tool-remove-tiles", "__CONTROL_RIGHT_CLICK__" },
       line_start,
-      {"item-description.railbow-selection-tool-remove-ents", "__CONTROL_KEY_SHIFT__ __CONTROL_STYLE_BEGIN__+__CONTROL_STYLE_END__ __CONTROL_RIGHT_CLICK__"},
+      { "item-description.railbow-selection-tool-remove-ents",  "__CONTROL_KEY_SHIFT__ __CONTROL_STYLE_BEGIN__+__CONTROL_STYLE_END__ __CONTROL_RIGHT_CLICK__" },
       font_end,
     }
   },
@@ -125,7 +126,7 @@ data:extend({
     action = "spawn-item",
     item_to_spawn = "railbow-selection-tool",
     consuming = "game-only",
-    factoriopedia_description = {"fpedia-description.railbow-get-selection-tool-shortcut"},
+    factoriopedia_description = { "fpedia-description.railbow-get-selection-tool-shortcut" },
   },
   {
     type = "custom-input",
@@ -134,6 +135,6 @@ data:extend({
     key_sequence = "SHIFT + N",
     action = "lua",
     consuming = "game-only",
-    factoriopedia_description = {"fpedia-description.railbow-open-gui"},
+    factoriopedia_description = { "fpedia-description.railbow-open-gui" },
   }
 })
