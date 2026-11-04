@@ -14,7 +14,11 @@ base_rail_list = {
     "half-diagonal-rail",
 }
 
+local elevated_available = false
+local naked_available = false
+
 if script.active_mods["elevated-rails"] then
+    elevated_available = true
     table.insert(rail_list, "rail-ramp")
     for _, rail in pairs(base_rail_list) do
         table.insert(rail_list, "elevated-" .. rail)
@@ -22,13 +26,34 @@ if script.active_mods["elevated-rails"] then
     log("elevated rails found and added")
 end
 
-if script.active_mods["naked-rails-f2"] then
-    for _, rail in pairs(base_rail_list) do
-        table.insert(rail_list, "naked-" .. rail)
-        table.insert(rail_list, "sleepy-" .. rail)
+local prefix = "naked-rails"
+
+log("searching for naked rails mod")
+
+for mod_name in pairs(script.active_mods) do
+    if string.find(mod_name, "naked-rails", 1, true) then
+        naked_available = true
+    end
+end
+
+if naked_available then
+    if elevated_available then
+      table.insert(rail_list, "naked-rail-ramp")
+      for _, rail in pairs(base_rail_list) do
+          table.insert(rail_list, "naked-" .. rail)
+          table.insert(rail_list, "naked-elevated-" .. rail)
+          table.insert(rail_list, "sleepy-" .. rail)
+          table.insert(rail_list, "sleepy-elevated-" .. rail)
+      end
+    else
+      for _, rail in pairs(base_rail_list) do
+          table.insert(rail_list, "naked-" .. rail)
+          table.insert(rail_list, "sleepy-" .. rail)
+      end
     end
     log("naked rails found and added")
 end
+
 local signal_list = { "rail-signal", "rail-chain-signal" }
 
 local function contains(table, element)
@@ -99,7 +124,10 @@ local function set_up_calculation(player, event, selection_tool_mode)
     local signals, rails = seperate_signals_and_rails(event.entities)
 
     if #rails <= 0 then -- no need to go any further with no rails
+        log("no rails in selection. returning")
         return
+    else    
+        log(#rails .. " rails in selection. continuing")
     end
 
     --- @type MaskCalculation

@@ -1,6 +1,8 @@
 local font_start = "[font=default-semibold][color=255, 230, 192]"
 local font_end = "[/color][/font]"
 local line_start = "\n  •   "
+local elevated_available = false
+local naked_available = false
 
 local filter = {
   "curved-rail-a",
@@ -17,17 +19,37 @@ base_rail_list = {
 }
 
 if mods["elevated-rails"] then
+  elevated_available = true
   table.insert(filter, "rail-ramp")
   for _, rail in pairs(base_rail_list) do
     table.insert(filter, "elevated-" .. rail)
   end
 end
 
-if mods["naked-rails-f2"] then
-  for _, rail in pairs(base_rail_list) do
-    table.insert(filter, "naked-" .. rail)
-    table.insert(filter, "sleepy-" .. rail)
-  end
+for mod_name in pairs(mods) do
+    if string.find(mod_name, "naked-rails", 1, true) then
+        log("Found mod: " .. mod_name)
+        naked_available = true
+    end
+end
+
+if naked_available then
+    if elevated_available then
+      table.insert(filter, "naked-rail-ramp")
+      for _, rail in pairs(base_rail_list) do
+          table.insert(filter, "naked-" .. rail)
+          table.insert(filter, "naked-elevated-" .. rail)
+          table.insert(filter, "sleepy-" .. rail)
+          table.insert(filter, "sleepy-elevated-" .. rail)
+      end
+      log("Added naked and naked elevated rails")
+    else
+      for _, rail in pairs(base_rail_list) do
+          table.insert(filter, "naked-" .. rail)
+          table.insert(filter, "sleepy-" .. rail)
+      end
+      log("Added naked rails")
+    end
 end
 
 table.insert(filter, "rail-signal")
