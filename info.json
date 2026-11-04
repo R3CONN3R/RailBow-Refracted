@@ -7,7 +7,7 @@
   "dependencies": [
     "base",
     "? elevated-rails",
-    "? naked-rails-f2",
+    "? djkolekson-naked-rails",
     "! RailBow"
   ],
   "description": "RailBow Refracted provides a configurable selection tool for laying tiles and landfill around rails while removing natural obstacles.",
