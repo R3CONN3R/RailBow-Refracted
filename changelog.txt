@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.3
+Date: 2026-11-04
+  Bugfixes:
+    - Changed naked rails detection to allow forks. Added naked elevated rails to detection
+---------------------------------------------------------------------------------------------------
 Version: 1.3.2
 Date: 2026-06-28
   Optimizations:
