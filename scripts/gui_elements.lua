@@ -245,11 +245,22 @@ function lib.elem_choose_header(frame)
         state = false,
         mouse_button_filter = { "left" }
     }
+    local decorate_elevated_checkbox = header.add {
+        type = "checkbox",
+        name = "decorate_elevated_checkbox",
+        tooltip = { "tooltips.railbow-decorate-elevated" },
+        caption = { "button.railbow-decorate-elevated" },
+        state = false,
+        mouse_button_filter = { "left" }
+    }
     if railbow_tool.presets[railbow_tool.opened_preset].remove_trees then
         remove_trees_checkbox.state = true
     end
     if railbow_tool.presets[railbow_tool.opened_preset].remove_cliffs then
         remove_cliffs_checkbox.state = true
+    end
+    if railbow_tool.presets[railbow_tool.opened_preset].decorate_elevated then
+        decorate_elevated_checkbox.state = true
     end
 
     return header

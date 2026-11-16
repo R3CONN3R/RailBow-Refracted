@@ -196,8 +196,6 @@ local function do_tile_picking(railbow_calculation)
     local tile_calculation = railbow_calculation.tile_calculation
 
     local blueprint_tiles = {}
-    local tile_map = mask_calculation.tile_map
-    local tiles = mask_calculation.tiles
 
     local surface = mask_calculation.rails[1].surface
     local player = game.players[railbow_calculation.player_index]

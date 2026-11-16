@@ -6,7 +6,8 @@ local lib = {}
 ---@param preset_name string|nil
 ---@param remove_trees boolean
 ---@param remove_cliffs boolean
-function lib.add_preset(player, tiles, preset_name, remove_trees, remove_cliffs)
+---@param decorate_elevated boolean
+function lib.add_preset(player, tiles, preset_name, remove_trees, remove_cliffs, decorate_elevated)
     local railbow_tool = storage.railbow_tools[player.index]
     local presets = railbow_tool.presets
     local n_presets = #presets
@@ -33,12 +34,20 @@ function lib.add_preset(player, tiles, preset_name, remove_trees, remove_cliffs)
         end
     end
 
+    if decorate_elevated == nil then
+        if settings.get_player_settings(player)["railbow-default-decorate-elevated"] ~= nil then
+            ---@diagnostic disable-next-line: cast-local-type
+            remove_cliffs = settings.get_player_settings(player)["railbow-default-decorate-elevated"].value
+        end
+    end
+
     local new_preset = {
         name = preset_name,
         tiles = tiles,
         mode = "vote",
         remove_trees = remove_trees,
-        remove_cliffs = remove_cliffs
+        remove_cliffs = remove_cliffs,
+        decorate_elevated = decorate_elevated
     }
     table.insert(storage.railbow_tools[player.index].presets, new_preset)
 
@@ -119,6 +128,9 @@ function lib.change_opened_preset(player, index, toggled)
     if not railbow_tool.presets[index].remove_cliffs then
         railbow_tool.presets[index].remove_cliffs = false
     end
+    if not railbow_tool.presets[index].decorate_elevated then
+        railbow_tool.presets[index].decorate_elevated = false
+    end
 
     local opened_tiles = railbow_tool.presets[index].tiles
     local frame = conflow.tile_selection_frame
@@ -126,6 +138,7 @@ function lib.change_opened_preset(player, index, toggled)
     frame.header.preset_name.text = railbow_tool.presets[index].name
     frame.header.remove_trees_checkbox.state = railbow_tool.presets[index].remove_trees
     frame.header.remove_cliffs_checkbox.state = railbow_tool.presets[index].remove_cliffs
+    frame.header.decorate_elevated_checkbox.state = railbow_tool.presets[index].decorate_elevated
 
     for i, element in pairs(frame.table.children) do
         if string.find(element.name, "tile_selector_") then
@@ -190,6 +203,15 @@ function lib.toggle_remove_cliffs(player, state)
     presets[opened_preset].remove_cliffs = state
 end
 
+--- @param player LuaPlayer
+--- @param state boolean
+function lib.toggle_decorate_elevated(player, state)
+    local railbow_tool = storage.railbow_tools[player.index]
+    local opened_preset = railbow_tool.opened_preset
+    local presets = railbow_tool.presets
+    presets[opened_preset].decorate_elevated = state
+end
+
 function lib.copy_preset(player)
     local railbow_tool = storage.railbow_tools[player.index]
     local opened_preset = railbow_tool.opened_preset
@@ -201,8 +223,9 @@ function lib.copy_preset(player)
         name = presets[opened_preset].name .. " - copy",
         tiles = util.table.deepcopy(presets[opened_preset].tiles),
         mode = "vote",
-        remove_trees_and_rocks = presets[opened_preset].remove_trees,
-        remove_cliffs = presets[opened_preset].remove_cliffs
+        remove_trees = presets[opened_preset].remove_trees,
+        remove_cliffs = presets[opened_preset].remove_cliffs,
+        decorate_elevated = presets[opened_preset].decorate_elevated
 
     }
 
@@ -276,7 +299,7 @@ function lib.import_preset(player)
         end
     end
     log(serpent.block(tiles))
-    lib.add_preset(player, tiles, preset.name, preset.remove_trees, preset.remove_cliffs)
+    lib.add_preset(player, tiles, preset.name, preset.remove_trees, preset.remove_cliffs, preset.decorate_elevated)
 end
 
 return lib

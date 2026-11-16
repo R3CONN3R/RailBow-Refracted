@@ -34,6 +34,7 @@ local mod_gui = require("mod-gui")
 --- @field tiles table<integer, string>
 --- @field remove_trees boolean
 --- @field remove_cliffs boolean
+--- @field decorate_elevated boolean
 
 --- @class RailBowSelectionTool
 --- @field presets RailBowConfig[]
@@ -60,7 +61,8 @@ local function initialize_global(player)
             tiles = init_tiles,
             mode = "vote",
             remove_trees = true,
-            remove_cliffs = false
+            remove_cliffs = false,
+            decorate_elevated = false
         }
 
         storage.railbow_tools[player.index] = {

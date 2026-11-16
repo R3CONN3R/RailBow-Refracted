@@ -59,6 +59,15 @@ data:extend({
     },
     {
         type = "bool-setting",
+        name = "railbow-default-decorate-elevated-rails",
+        setting_type = "runtime-per-user",
+        default_value = false,
+        order = "g",
+        localised_name = { "mod-setting-name.railbow-default-decorate-elevated-rails" },
+        localised_description = { "mod-setting-description.railbow-default-decorate-elevated-rails" }
+    },
+    {
+        type = "bool-setting",
         name = "railbow-debug",
         setting_type = "runtime-per-user",
         default_value = false,

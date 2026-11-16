@@ -26,8 +26,6 @@ if script.active_mods["elevated-rails"] then
     log("elevated rails found and added")
 end
 
-local prefix = "naked-rails"
-
 log("searching for naked rails mod")
 
 for mod_name in pairs(script.active_mods) do
@@ -67,12 +65,14 @@ end
 
 table.contains = contains
 
-local function seperate_signals_and_rails(entities)
+local function seperate_signals_and_rails(entities, decorate_elevated)
     local signals = {}
     local rails = {}
     for _, entity in pairs(entities) do
         if table.contains(rail_list, entity.type) then
+            if decorate_elevated or not entity.name:find("elevated", 1 , true) then
             table.insert(rails, entity)
+            end
         elseif table.contains(signal_list, entity.type) then
             table.insert(signals, entity)
         end
@@ -121,7 +121,7 @@ local function set_up_calculation(player, event, selection_tool_mode)
         end
     end
 
-    local signals, rails = seperate_signals_and_rails(event.entities)
+    local signals, rails = seperate_signals_and_rails(event.entities, selected_preset.decorate_elevated)
 
     if #rails <= 0 then -- no need to go any further with no rails
         log("no rails in selection. returning")

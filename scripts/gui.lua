@@ -134,6 +134,8 @@ local function checked_state_changed(event)
         interactions.toggle_remove_trees(player, element.state)
     elseif element.name == "remove_cliffs_checkbox" then
         interactions.toggle_remove_cliffs(player, element.state)
+    elseif element.name == "decorate_elevated_checkbox" then
+        interactions.toggle_decorate_elevated(player, element.state)
     end
 end
 
